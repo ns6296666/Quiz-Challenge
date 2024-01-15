@@ -35,9 +35,22 @@ let timerInterval;
 function startQuiz() {
   document.getElementById("questions").style.display = "block";
   document.getElementById("end-screen").style.display = "none";
-
+  startTimer();
   showQuestion();
 }
+
+// function to start timer
+function startTimer() {
+  timerInterval = setInterval(function () {
+    timeLeft--;
+    document.getElementById("time").textContent = timeLeft;
+
+    if (timeLeft <= 0 || currentQuestionIndex === questions.length) {
+      endQuiz();
+    }
+  }, 1000);
+}
+
 // function to show question
 function showQuestion() {
   const currentQuestion = TotalQuestions[currentQuestionIndex];
