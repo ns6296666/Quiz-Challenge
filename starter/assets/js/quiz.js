@@ -26,3 +26,34 @@ const TotalQuestions = [
     correctIndex: 0,
   },
 ];
+console.log("cliked");
+let currentQuestionIndex = 0;
+let timeLeft = 60;
+let timerInterval;
+
+// function to start quiz
+function startQuiz() {
+  document.getElementById("questions").style.display = "block";
+  document.getElementById("end-screen").style.display = "none";
+
+  showQuestion();
+}
+// function to show question
+function showQuestion() {
+  const currentQuestion = TotalQuestions[currentQuestionIndex];
+  console.log("========", currentQuestion);
+  document.getElementById("question-title").textContent =
+    currentQuestion.question;
+
+  const answersContainer = document.getElementById("choices");
+  answersContainer.innerHTML = "";
+
+  for (let i = 0; i < currentQuestion.answers.length; i++) {
+    const button = document.createElement("button");
+    button.textContent = currentQuestion.answers[i];
+    button.onclick = function () {
+      checkAnswer(i);
+    };
+    answersContainer.appendChild(button);
+  }
+}
